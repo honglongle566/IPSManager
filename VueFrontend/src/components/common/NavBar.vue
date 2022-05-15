@@ -3,18 +3,21 @@
     <a-row type="flex" align="middle">
       <a-col :flex="1">
         <menu-unfold-outlined
-          v-if="collapsed"
+          v-if="collapsedSideBar"
           class="trigger icon-2"
-          @click="() => changeSibar()"
+          @click="TOGGLE_SIDEBAR"
         />
         <menu-fold-outlined
           v-else
           class="trigger icon-2"
-          @click="() => changeSibar()"
+          @click="TOGGLE_SIDEBAR"
         />
         <a-breadcrumb style="display: inline; padding-left: 25px">
-          <a-breadcrumb-item><a href="">Home</a></a-breadcrumb-item>
-          <a-breadcrumb-item>Application Center</a-breadcrumb-item>
+          <a-breadcrumb-item>
+            <router-link to="/"
+              >{{ this.$route.name }}
+            </router-link></a-breadcrumb-item
+          >
         </a-breadcrumb></a-col
       >
       <a-col :flex="1">
@@ -84,19 +87,22 @@
 </template>
 <script>
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  PrinterOutlined,
-  FileTextOutlined,
-  FullscreenOutlined,
-  FullscreenExitOutlined,
-  FontSizeOutlined,
-  FontColorsOutlined,
-  UserOutlined,
   DownOutlined,
+  FileTextOutlined,
+  FontColorsOutlined,
+  FontSizeOutlined,
+  FullscreenExitOutlined,
+  FullscreenOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PrinterOutlined,
+  UserOutlined,
 } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+import { mapMutations, mapGetters } from 'vuex';
 export default defineComponent({
+  computed: mapGetters(['collapsedSideBar']),
+  methods: mapMutations(['TOGGLE_SIDEBAR']),
   components: {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -109,7 +115,6 @@ export default defineComponent({
     UserOutlined,
     DownOutlined,
   },
-  props: ['collapsed', 'changeSibar'],
 
   setup() {
     return {

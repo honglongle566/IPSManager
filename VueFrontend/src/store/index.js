@@ -1,19 +1,14 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 
 // Import modules
 import auth from './modules/auth';
-import todos from './modules/todos';
+import common from './modules/common';
 
-Vue.use(Vuex);
-
-const storeData = {
+const store = createStore({
   modules: {
     auth,
-    todos,
+    common,
   },
-};
-
-const store = new Vuex.Store(storeData);
+});
 
 export default store;
