@@ -9,7 +9,6 @@
         <img src="../../assets/sygnet.svg" alt="" class="brand-logo" />
       </div>
       <a-row v-else class="trigger box-brand">
-        <img src="../../assets/logo.svg" alt="" class="brand-logo" />
         <div class="brand-title">IPSManager</div>
       </a-row>
     </div>
