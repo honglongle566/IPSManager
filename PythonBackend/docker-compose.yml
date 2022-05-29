@@ -2,6 +2,6 @@ version: '3.8'
 
 services:
   supserset:
-    build: .
+    build: ./superset
     ports:
       - 8088:8088
