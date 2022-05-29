@@ -1,0 +1,3 @@
+[submodule "PythonBackend/opensearch-dbapi"]
+	path = PythonBackend/opensearch-dbapi
+	url = git@github.com:nguyentrongquocuet/opensearch-dbapi.git
