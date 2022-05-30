@@ -9,6 +9,16 @@ const routes = [
       import(/* webpackChunkName: "dashboard" */ "../views/dashboardView.vue"),
   },
   {
+    path: "/login",
+    name: "LoginAuth",
+    list: [{ path: "/", name: "LoginAuth" }],
+    meta: {
+      layout: "auth",
+    },
+    component: () =>
+      import(/* webpackChunkName: "dashboard" */ "../views/login/loginView.vue"),
+  },
+  {
     path: "/net-ips/alert",
     name: "Alert",
     list: [
