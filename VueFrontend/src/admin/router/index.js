@@ -5,9 +5,6 @@ const routes = [
     path: "/",
     name: "Dashboard",
     list: [{ path: "/", name: "Dashboard" }],
-    meta: {
-      layout: "auth",
-    },
     component: () =>
       import(/* webpackChunkName: "dashboard" */ "../views/dashboardView.vue"),
   },
@@ -97,34 +94,6 @@ const routes = [
     component: () =>
       import(
         /* webpackChunkName: "netIPS-statistics" */ "../views/netIPS/statisticsView.vue"
-      ),
-  },
-  {
-    path: "/setting/role-list",
-    name: "Role List",
-    list: [
-      {
-        path: "/setting/user-list",
-        name: "Settings",
-      },
-    ],
-    component: () =>
-      import(
-        /* webpackChunkName: "settings-role-list" */ "../views/settings/roleListView.vue"
-      ),
-  },
-  {
-    path: "/setting/system-setting",
-    name: "System Settings ",
-    list: [
-      {
-        path: "/setting/user-list",
-        name: "Settings",
-      },
-    ],
-    component: () =>
-      import(
-        /* webpackChunkName: "settings-system" */ "../views/settings/systemSettingView.vue"
       ),
   },
   {
