@@ -20,9 +20,9 @@
       </div>
 
       <div class="form__field">
-        <input type="submit" value="Sign In">
+        <button onclick="" type="button" class="el-button el-button--primary el-button--medium" style="width:100%;margin-bottom: 30px;
+        background-color: #1890ff;border-color: #1890ff;color:white;" >Login</button>
       </div>
-
     </form>
 
   </div>
