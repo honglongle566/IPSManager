@@ -68,22 +68,6 @@
             ><span><team-outlined /> Danh sách</span>
           </a-menu-item></router-link
         >
-        <router-link to="/setting/role-list"
-          ><a-menu-item key="roleList"
-            ><span
-              ><deployment-unit-outlined />
-              Vai trò
-            </span>
-          </a-menu-item></router-link
-        >
-        <router-link to="/setting/system-setting"
-          ><a-menu-item key="systemSetting"
-            ><span>
-              <tool-outlined />
-              Cài đặt</span
-            >
-          </a-menu-item></router-link
-        >
       </a-sub-menu>
     </a-menu>
   </a-layout-sider>
@@ -91,7 +75,6 @@
 <script>
 import {
   BarChartOutlined,
-  DeploymentUnitOutlined,
   FileSearchOutlined,
   GlobalOutlined,
   HomeOutlined,
@@ -101,13 +84,12 @@ import {
   SettingOutlined,
   TableOutlined,
   TeamOutlined,
-  ToolOutlined,
-} from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-import { mapGetters } from 'vuex';
+} from "@ant-design/icons-vue";
+import { defineComponent, ref } from "vue";
+import { mapGetters } from "vuex";
 
 export default defineComponent({
-  computed: mapGetters(['collapsedSideBar']),
+  computed: mapGetters(["collapsedSideBar"]),
 
   components: {
     SettingOutlined,
@@ -120,12 +102,10 @@ export default defineComponent({
     LineChartOutlined,
     TableOutlined,
     FileSearchOutlined,
-    DeploymentUnitOutlined,
-    ToolOutlined,
   },
   setup() {
     return {
-      selectedKeys: ref(['1']),
+      selectedKeys: ref(["1"]),
     };
   },
 });

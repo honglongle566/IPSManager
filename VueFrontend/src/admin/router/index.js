@@ -107,34 +107,6 @@ const routes = [
       ),
   },
   {
-    path: "/setting/role-list",
-    name: "Role List",
-    list: [
-      {
-        path: "/setting/user-list",
-        name: "Settings",
-      },
-    ],
-    component: () =>
-      import(
-        /* webpackChunkName: "settings-role-list" */ "../views/settings/roleListView.vue"
-      ),
-  },
-  {
-    path: "/setting/system-setting",
-    name: "System Settings ",
-    list: [
-      {
-        path: "/setting/user-list",
-        name: "Settings",
-      },
-    ],
-    component: () =>
-      import(
-        /* webpackChunkName: "settings-system" */ "../views/settings/systemSettingView.vue"
-      ),
-  },
-  {
     path: "/setting/user-list",
     name: "User List",
     list: [
