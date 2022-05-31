@@ -9,18 +9,18 @@
         <label for="login__username"><svg class="icon">
             <use xlink:href="#icon-user"></use>
           </svg><span class="hidden">Username</span></label>
-        <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
+        <input autocomplete="username" id="username" v-model="username" type="text" name="username" class="form__input" placeholder="Username" required>
       </div>
 
       <div class="form__field">
         <label for="login__password"><svg class="icon">
             <use xlink:href="#icon-lock"></use>
           </svg><span class="hidden">Password</span></label>
-        <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
+        <input id="password" type="password" name="password" v-model="password" class="form__input" placeholder="Password" required>
       </div>
 
       <div class="form__field">
-        <button onclick="" type="button" class="el-button el-button--primary el-button--medium" style="width:100%;margin-bottom: 30px;
+        <button type="button" @click="authenticate" class="el-button el-button--primary el-button--medium" style="width:100%;margin-bottom: 30px;
         background-color: #1890ff;border-color: #1890ff;color:white;" >Login</button>
       </div>
     </form>
@@ -41,31 +41,29 @@
 
 </body>
 </template>
-<script>
-
-import { defineComponent, reactive } from 'vue';
-export default defineComponent({
-    setup() {
-        const formState = reactive({
-            username: '',
-            password: '',
-            remember: true,
-        });
-
-        const onFinish = values => {
-            console.log('Success:', values);
-        };
-
-        const onFinishFailed = errorInfo => {
-            console.log('Failed:', errorInfo);
-        };
-
-        return {
-            formState,
-            onFinish,
-            onFinishFailed,
-        };
+<script>    
+  import EventBus from '../../event/EventBus.js';
+  export default {
+    data(){
+      return {
+        username:'',
+        password:'',
+        errorMsg:'',
+      }
     },
-
-});
+    method: {
+      authenticate (){
+        this.$store.dispatch('login',{username: this.username, password:this.password})
+          .then(() => this.$router.push('/'))
+      },
+      mounted (){
+        EventBus.$on('failedAuthentication',(msg) => {
+          this.errorMsg = msg
+        })
+      },
+      beforeDestroy (){
+        EventBus.$off('failedAuthentication')
+      }
+    }
+  }
 </script>
