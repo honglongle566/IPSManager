@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask
 import psycopg2 
 import psycopg2.extras
 app = Flask(__name__)
-app.secret_key="cairocoders-ednalan"
 
 DB_HOST ="localhost"
 DB_NAME = "Demo"

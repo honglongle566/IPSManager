@@ -5,10 +5,11 @@ import json
 from flask import Blueprint, jsonify, request, current_app
 
 import jwt
+from psycopg2 import apilevel
 
 from .models import db, User
 
-@api.route('/login', method=('POST',))
+@apilevel.route('/login', method=('POST',))
 def login():
     data = request.get_json()
     user = User.authenticate(**data)
