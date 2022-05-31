@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
-import { authenticate } from '../api';
-import { isValidJwt,EventBus } from '../utils/authenticate';
+import { authenticate } from '@/admin/api';
+import { isValidJwt,EventBus } from '@/admin/utils/import';
 // Import modules
 import auth from './modules/auth';
 import common from './modules/common';

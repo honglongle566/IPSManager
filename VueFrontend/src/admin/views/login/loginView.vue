@@ -42,7 +42,6 @@
 </body>
 </template>
 <script>    
-  import EventBus from '../../event/EventBus.js';
   export default {
     data(){
       return {
@@ -57,11 +56,13 @@
           .then(() => this.$router.push('/'))
       },
       mounted (){
+        // eslint-disable-next-line no-undef
         EventBus.$on('failedAuthentication',(msg) => {
           this.errorMsg = msg
         })
       },
       beforeDestroy (){
+        // eslint-disable-next-line no-undef
         EventBus.$off('failedAuthentication')
       }
     }
