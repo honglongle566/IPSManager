@@ -1,4 +1,5 @@
 <template>
+  <ModeEditUser />
   <a-row>
     <a-col :span="8">
       <a-row>
@@ -30,33 +31,26 @@
       </a-row></a-col
     >
   </a-row>
-  <a-table
-    :columns="columns"
-    :row-key="(record) => record.login.uuid"
-    :data-source="dataSource"
-    :pagination="pagination"
-    :loading="loading"
-    @change="handleTableChange"
-  >
+  <a-table :columns="columns" :data-source="data" class="mt-1">
     <template #headerCell="{ column }">
-      <template v-if="column.key === 'name'">
+      <template v-if="column.dataIndex === 'id'">
         <span> ID </span>
       </template>
-      <template v-else-if="column.key === 'gender'">
-        <span> Username </span>
+      <template v-else-if="column.dataIndex === 'username'">
+        <span class="text-center"> Username </span>
       </template>
-      <template v-else-if="column.key === 'email'">
-        <span> Actions </span>
+      <template v-else-if="column.dataIndex === 'actions'">
+        <span class="text-center"> Actions </span>
       </template>
     </template>
-    <template #bodyCell="{ column, text }">
-      <template v-if="column.dataIndex === 'name'"
-        >{{ text.first }} {{ text.last }}</template
-      >
-      <template v-else-if="column.dataIndex === 'email'">
+    <template #bodyCell="{ column, record }">
+      <template v-if="column.dataIndex === 'username'">
+        <span class="text-center">{{ record.username }}</span>
+      </template>
+      <template v-if="column.dataIndex === 'actions'">
         <a-row type="flex" justify="space-around" align="middle">
           <a-space>
-            <a-button type="primary">
+            <a-button type="primary" @click="TOGGLE_MODEL_SHOW_EDIT">
               <EditOutlined />
             </a-button>
             <a-button type="primary" danger> <DeleteOutlined /> </a-button
@@ -73,75 +67,51 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons-vue";
-import { usePagination } from "vue-request";
-import { computed, defineComponent } from "vue";
-import axios from "axios";
+import { defineComponent } from "vue";
+import { mapMutations } from "vuex";
 const columns = [
   {
-    title: "name",
-    dataIndex: "name",
+    title: "Id",
+    dataIndex: "id",
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+      multiple: 2,
+    },
+    width: "33%",
+  },
+  {
+    title: "Username",
+    dataIndex: "username",
     sorter: true,
     width: "33%",
   },
   {
-    title: "Gender",
-    dataIndex: "gender",
-    sorter: true,
-    width: "33%",
-  },
-  {
-    title: "Email",
-    dataIndex: "email",
+    title: "Actions",
+    dataIndex: "actions",
   },
 ];
-const queryData = (params) => {
-  return axios.get("https://randomuser.me/api?noinfo", {
-    params,
+const data = [];
+for (let i = 0; i < 100; i++) {
+  data.push({
+    key: i.toString(),
+    id: i + 1,
+    username: `Edrward ${i}`,
   });
-};
+}
+import ModeEditUser from "../../components/common/ModelEditUser.vue";
 export default defineComponent({
+  methods: mapMutations(["TOGGLE_MODEL_SHOW_EDIT"]),
   components: {
     SearchOutlined,
     PlusOutlined,
     EditOutlined,
     DeleteOutlined,
+    ModeEditUser,
   },
   setup() {
-    const {
-      data: dataSource,
-      run,
-      loading,
-      current,
-      pageSize,
-    } = usePagination(queryData, {
-      formatResult: (res) => res.data.results,
-      pagination: {
-        currentKey: "page",
-        pageSizeKey: "results",
-      },
-    });
-    const pagination = computed(() => ({
-      total: 200,
-      current: current.value,
-      pageSize: pageSize.value,
-    }));
-
-    const handleTableChange = (pag, filters, sorter) => {
-      run({
-        results: pag.pageSize,
-        page: pag?.current,
-        sortField: sorter.field,
-        sortOrder: sorter.order,
-        ...filters,
-      });
-    };
-
     return {
-      dataSource,
-      pagination,
-      loading,
+      data,
       columns,
-      handleTableChange,
     };
   },
 });
