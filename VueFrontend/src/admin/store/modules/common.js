@@ -8,6 +8,7 @@ const getters = {
   collapsedSideBar: (state) => state.common.collapsedSideBar,
 };
 
+
 const actions = {};
 
 const mutations = {
