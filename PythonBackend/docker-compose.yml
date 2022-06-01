@@ -5,3 +5,9 @@ services:
     build: ./superset
     ports:
       - 8088:8088
+      #- 8099:8099
+    volumes:
+      - ./superset/database:/app/database
+      - ./superset/conf:/app/pythonpath
+    env_file:
+      - .env
